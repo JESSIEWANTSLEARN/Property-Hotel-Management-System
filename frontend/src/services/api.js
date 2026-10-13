@@ -1,8 +1,10 @@
-const rawApiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+const configuredApiUrl = (import.meta.env.VITE_API_URL || '').trim()
 
-export const API_URL = rawApiUrl.startsWith('http')
-  ? rawApiUrl.replace(/\/$/, '')
-  : `https://${rawApiUrl.replace(/\/$/, '')}`
+export const API_URL = configuredApiUrl
+  ? configuredApiUrl.replace(/\/$/, '')
+  : import.meta.env.DEV
+    ? 'http://127.0.0.1:8000'
+    : ''
 
 const TOKEN_KEY = 'crud_lab_token'
 
@@ -20,6 +22,7 @@ export function clearToken() {
 
 export async function apiRequest(path, options = {}) {
   const token = getToken()
+
   const headers = {
     Accept: 'application/json',
     ...(options.body ? { 'Content-Type': 'application/json' } : {}),
@@ -42,7 +45,9 @@ export async function apiRequest(path, options = {}) {
       ? Object.values(data.errors).flat()[0]
       : null
 
-    throw new Error(validationMessage || data.message || 'Request failed.')
+    throw new Error(
+      validationMessage || data.message || 'Request failed.'
+    )
   }
 
   return data
