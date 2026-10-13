@@ -17,6 +17,9 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends git unzip libonig-dev libzip-dev \
     && docker-php-ext-install pdo_mysql mbstring bcmath zip \
     && a2enmod rewrite headers \
+    && SECRET_GROUP="$(getent group 1000 | cut -d: -f1)" \
+    && if [ -z "${SECRET_GROUP}" ]; then groupadd -g 1000 rendersecrets; SECRET_GROUP=rendersecrets; fi \
+    && usermod -a -G "${SECRET_GROUP}" www-data \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
