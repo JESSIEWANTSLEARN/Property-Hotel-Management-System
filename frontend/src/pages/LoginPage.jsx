@@ -1,9 +1,10 @@
-﻿import { useState } from 'react'
+import { useState } from 'react'
 import { login } from '../services/authService'
 
 function LoginPage({ onLogin }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -45,7 +46,7 @@ function LoginPage({ onLogin }) {
         <label>
           Password
           <input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Your password"
@@ -53,7 +54,20 @@ function LoginPage({ onLogin }) {
           />
         </label>
 
-        <button className="primary-button full-width" type="submit" disabled={busy}>
+        <label>
+          <input
+            type="checkbox"
+            checked={showPassword}
+            onChange={(event) => setShowPassword(event.target.checked)}
+          />
+          Show password
+        </label>
+
+        <button
+          className="primary-button full-width"
+          type="submit"
+          disabled={busy}
+        >
           {busy ? 'Signing in...' : 'Login'}
         </button>
       </form>
