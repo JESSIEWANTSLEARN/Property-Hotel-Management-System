@@ -6,6 +6,8 @@
         Options FollowSymLinks
         AllowOverride All
         Require all granted
+
+        DirectoryIndex index.html index.php
     </Directory>
 
     ErrorLog /proc/self/fd/2
