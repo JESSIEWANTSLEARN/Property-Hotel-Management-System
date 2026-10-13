@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import { login } from '../services/authService'
+import { useState } from "react";
+import { login } from "../services/authService";
 
 function LoginPage({ onLogin }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState('')
-  const [busy, setBusy] = useState(false)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [busy, setBusy] = useState(false);
 
   async function submit(event) {
-    event.preventDefault()
-    setError('')
-    setBusy(true)
+    event.preventDefault();
+    setError("");
+    setBusy(true);
 
     try {
-      const user = await login(email, password)
-      onLogin(user)
+      const user = await login(email, password);
+      onLogin(user);
     } catch (requestError) {
-      setError(requestError.message)
+      setError(requestError.message);
     } finally {
-      setBusy(false)
+      setBusy(false);
     }
   }
 
   return (
     <main className="login-shell">
       <form className="login-card" onSubmit={submit}>
-        <p className="eyebrow">CRUD Lab Boilerplate</p>
+        <p className="eyebrow">Property Hotel Management System(PMS)</p>
         <h1>Account Login</h1>
         <p className="muted">Login as a user or administrator.</p>
 
@@ -46,7 +46,7 @@ function LoginPage({ onLogin }) {
         <label>
           Password
           <input
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             placeholder="Your password"
@@ -68,11 +68,11 @@ function LoginPage({ onLogin }) {
           type="submit"
           disabled={busy}
         >
-          {busy ? 'Signing in...' : 'Login'}
+          {busy ? "Signing in..." : "Login"}
         </button>
       </form>
     </main>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;
