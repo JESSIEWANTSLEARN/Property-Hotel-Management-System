@@ -3,7 +3,7 @@ function AppHeader({ user, onLogout }) {
     <header className="app-header">
       <div>
         <p className="eyebrow">Property Hotel Management PMS</p>
-        <h1> Control Panel</h1>
+        <h1>PMS System Control Panel</h1>
       </div>
 
       <div className="account-box">
