@@ -2,14 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return response()->file(public_path('index.html'));
-});
+Route::get('/{path?}', function () {
+    $index = public_path('index.html');
 
-Route::fallback(function () {
-    if (request()->is('api/*')) {
-        abort(404);
-    }
+    abort_unless(
+        is_file($index),
+        503,
+        'The frontend build is not available.'
+    );
 
-    return response()->file(public_path('index.html'));
-});
+    return response()->file($index);
+})->where('path', '^(?!api(?:/|$)).*');
