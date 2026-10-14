@@ -38,7 +38,7 @@ function LoginPage({ onLogin }) {
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder="name@example.com"
+            placeholder="pms_admin@gmail.com"
             required
           />
         </label>
