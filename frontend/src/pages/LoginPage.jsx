@@ -49,7 +49,7 @@ function LoginPage({ onLogin }) {
             type={showPassword ? "text" : "password"}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
-            placeholder="Your hotelpms2026"
+            placeholder="hotelpms2026"
             required
           />
         </label>
