@@ -1,5 +1,5 @@
 # StandByGIthub CRUD Lab Boilerplate
-https://standbygithub.onrender.com/ Website itself
+Link: https://standbygithub.onrender.com/
 
 
 Reusable lab-exam starter with a React frontend, Laravel API, Super Admin login, CRUD records, Render deployment, and Aiven MySQL support.
